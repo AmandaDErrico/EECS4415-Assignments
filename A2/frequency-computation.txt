@@ -1,0 +1,16 @@
+Frequency is defined as the number of occurrences for each event / total number of events.
+Essentially, you can increment the counter each time in the mapper function k_skip_n_grams_per_song
+(within the last for loop). From there, you execute a final print statement and use a 
+unique character to identify the accumulated total in the reducer() function. This unique character
+will be the space character (ascii 32). We are using this character because in our pre-processing
+file we have returned a string with stopwords removed, so in our mapper file we split that string
+to a list, and that list is guaranteed to not have any whitespace. 
+
+Within each reducer function of Part A, there is a function called reducer(). After a sorted mapper 
+is available, we can retrieve the total number of events in the very first line. From there we can divide 
+each occurance by the total number of events in line 1 of stdin:
+
+print(str(sums/total num of events) + '\t' + previous)
+
+This way, once the reducer finishes accumulating the occurrances of each ngram, a final division
+of total events will be done to calculate the frequency. 
